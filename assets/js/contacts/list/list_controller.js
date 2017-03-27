@@ -8,6 +8,10 @@ ContactManager.module("ContactsApp.List", function(
 				collection: contacts
 			});
 
+			contactsListView.on("childview:contact:delete", function(childView, model) {
+				contacts.remove(model);
+			})
+
 			ContactManager.regions.main.show(contactsListView);
 		}
 	} // end List.Controller

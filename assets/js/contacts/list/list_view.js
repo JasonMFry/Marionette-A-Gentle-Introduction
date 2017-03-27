@@ -5,11 +5,24 @@ ContactManager.module("ContactsApp.List", function(
 		template: "#contact-list-item",
 
 		events: {
-			"click": "highlightName"
+			"click": "highlightName",
+			"click button.js-delete": "deleteClicked"
 		},
 
-		highlightName: function() {
+		highlightName: function(e) {
 			this.$el.toggleClass("warning");
+		},
+
+		deleteClicked: function(e) {
+			e.stopPropagation();
+			this.trigger("contact:delete", this.model);
+		},
+
+		remove: function() {
+			var self = this;
+			this.$el.fadeOut(function() {
+				Marionette.ItemView.prototype.remove.call(self);
+			});
 		}
 	}); // end List.Contact
 
