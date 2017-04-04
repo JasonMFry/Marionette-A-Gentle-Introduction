@@ -10,7 +10,7 @@ ContactManager.module("ContactsApp.List", function(
 
 			contactsListView.on("childview:contact:delete",
 											function(childView, model) {
-				contacts.remove(model);
+				model.destroy();
 			});
 
 			contactsListView.on("childview:contact:show",
