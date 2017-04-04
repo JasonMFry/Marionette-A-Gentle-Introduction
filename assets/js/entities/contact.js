@@ -52,7 +52,7 @@ ContactManager.module("Entities", function(
 					var models = initializeContacts();
 					contacts.reset(models);
 				}
-			})
+			});
 			return promise;
 		},
 
