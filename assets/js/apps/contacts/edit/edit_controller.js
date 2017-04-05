@@ -16,13 +16,22 @@ ContactManager.module("ContactsApp.Edit", function(Edit, ContactManager,
 				view = new Edit.Contact({
 					model: contact
 				});
+
+				view.on("form:submit", function(data) {
+					if (contact.save(data)) {
+						ContactManager.trigger("contact:show", contact.get("id"));
+					}
+					else {
+						view.triggerMethod("form:data:invalid", contact.validationError);
+					}
+				});
 			} // end if
 			else {
 				view = new ContactManager.ContactsApp.Show.MissingContact();
 			}
 
 			ContactManager.regions.main.show(view);
-			});
-		}
-	};
-});
+			}); // end .done callback function
+		} // end editContact function
+	}; // end Edit.Controller
+}); // end ContactManager.module
