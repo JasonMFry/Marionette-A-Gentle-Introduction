@@ -7,7 +7,17 @@ ContactManager.module("ContactsApp.List", function(
 		events: {
 			"click": "highlightName",
 			"click button.js-delete": "deleteClicked",
-			"click td a.js-show": "showClicked"
+			"click td a.js-show": "showClicked",
+			"click td a.js-edit": "editClicked"
+		},
+
+		flash: function(cssClass) {
+			var $view = this.$el;
+			$view.hide().toggleClass(cssClass).fadeIn(800, function() {
+				setTimeout(function() {
+					$view.toggleClass(cssClass);
+				}, 500);
+			});
 		},
 
 		highlightName: function(e) {
@@ -18,6 +28,12 @@ ContactManager.module("ContactsApp.List", function(
 			e.preventDefault();
 			e.stopPropagation();
 			this.trigger("contact:show", this.model);
+		},
+
+		editClicked: function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			this.trigger("contact:edit", this.model);
 		},
 
 		deleteClicked: function(e) {
@@ -40,4 +56,4 @@ ContactManager.module("ContactsApp.List", function(
 		childView: List.Contact,
 		childViewContainer: "tbody"
 	}); // end List.Contacts
-}) // end ContactManager.module
+}); // end ContactManager.module

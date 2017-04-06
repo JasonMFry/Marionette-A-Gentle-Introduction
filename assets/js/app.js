@@ -6,14 +6,15 @@ ContactManager.navigate = function(route, options) {
 };
 
 ContactManager.getCurrentRoute = function() {
-	return Backbone.history.fragment
+	return Backbone.history.fragment;
 };
 
 ContactManager.on("before:start", function(){
 	var RegionContainer = Marionette.LayoutView.extend({
 		el: "#app-container",
 		regions: {
-			main: "#main-region"
+			main: "#main-region",
+			dialog: "#dialog-region"
 		}
 	});
 	ContactManager.regions = new RegionContainer();
