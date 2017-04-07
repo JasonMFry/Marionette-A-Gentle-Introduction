@@ -1,5 +1,21 @@
 ContactManager.module("ContactsApp.List", function(
 			List, ContactManager, Backbone, Marionette, $, _){
+	// the below List.[etcs] originate in index.html.  This document controls
+	// their view with various options passed in, and functions that get called
+	// when elements get interacted with.
+	List.Layout = Marionette.LayoutView.extend({
+		template: "#contact-list-layout",
+
+		regions: {
+			panelRegion: "#panel-region",
+			contactsRegion: "#contacts-region"
+		}
+	});
+
+	List.Panel = Marionette.ItemView.extend({
+		template: "#contact-list-panel"
+	});
+
 	List.Contact = Marionette.ItemView.extend({
 		tagName: "tr",
 		template: "#contact-list-item",

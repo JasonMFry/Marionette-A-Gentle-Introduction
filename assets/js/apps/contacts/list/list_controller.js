@@ -7,9 +7,17 @@ ContactManager.module("ContactsApp.List", function(
 
 			var fetchingContacts = ContactManager.request("contact:entities");
 
+			var contactsListLayout = new List.Layout();
+			var contactsListPanel = new List.Panel();
+
 			$.when(fetchingContacts).done(function(contacts) {
 				var contactsListView = new List.Contacts({
 					collection: contacts
+				});
+
+				contactsListLayout.on("show", function() {
+					contactsListLayout.panelRegion.show(contactsListPanel);
+					contactsListLayout.contactsRegion.show(contactsListView);
 				});
 
 				contactsListView.on("childview:contact:show",
@@ -44,7 +52,7 @@ ContactManager.module("ContactsApp.List", function(
 					model.destroy();
 				});
 
-				ContactManager.regions.main.show(contactsListView);
+				ContactManager.regions.main.show(contactsListLayout);
 			});
 		}
 	}; // end List.Controller
